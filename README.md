@@ -8,7 +8,7 @@
   many "MSA application features" that are of general interest to bioinformatics
   researchers e.g. consensus, selection, labels
 
-| size      | memory  | time                                                          |
+| size (rows x columns)      | memory  | time                                                          |
 | --------- | ------- | ------------------------------------------------------------- |
 | 50 x 50   | 50Mb    | instant                                                       |
 | 100 x 100 | 77Mb    | small delay                                                   |
