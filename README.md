@@ -29,7 +29,5 @@
 - New software
 - Handles 5120x5120 with smooth scroll
 - Variety of user interface features
-- Integrated with genome browser
-- Integrated with protein viewer[^1]
-
-[^1]: not really done
+- Integrated with genome browser via jbrowse-plugin-msaviewer
+- Capable of integrating with protein viewer (not quite done, but would be good to have. point of reference: Fold-Mason has good features for this)
