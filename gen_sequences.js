@@ -21,20 +21,20 @@ const letters = [
   "W",
   "Y",
 ];
-function gen(M, N) {
-  let out = "";
+function gen(M, N, str) {
   for (let i = 0; i < M; i++) {
     const id = `>seq${i}`;
     let seq = "";
     for (let i = 0; i < N; i++) {
       seq += letters[Math.floor(Math.random() * letters.length)];
     }
-    out += `${id}\n${seq}\n`;
+    str.write(`${id}\n${seq}\n`);
   }
-  return out;
 }
 
 fs.mkdirSync("out", { recursive: true });
 for (let i = 128; i < 50_000; i *= 2) {
-  fs.writeFileSync(`out/${i}_${i}.fa`, gen(i, i));
+  const str = fs.createWriteStream(`out/${i}_${i}.fa`);
+  gen(i, i, str);
+  str.end();
 }
