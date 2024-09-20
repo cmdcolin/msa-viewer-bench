@@ -8,4 +8,4 @@ ggplot(df, aes(x = size, y = time, color = program)) +
   ylab("time (s)") +
   xlab("MSA size NxN") +
   ggtitle("Time to render MSA")
-ggsave("plot.png")
+ggsave("img/1.png")
