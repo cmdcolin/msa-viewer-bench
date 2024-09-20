@@ -1,5 +1,4 @@
 screenshots
-*.png
 *.tsv
 node_modules
 json
