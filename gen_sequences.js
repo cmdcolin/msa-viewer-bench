@@ -35,6 +35,6 @@ function gen(M, N) {
 }
 
 fs.mkdirSync("out", { recursive: true });
-for (let i = 128; i < 10_000; i *= 2) {
+for (let i = 128; i < 50_000; i *= 2) {
   fs.writeFileSync(`out/${i}_${i}.fa`, gen(i, i));
 }
