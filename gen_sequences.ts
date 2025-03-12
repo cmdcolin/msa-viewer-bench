@@ -34,7 +34,7 @@ function gen(M, N, str) {
 
 fs.mkdirSync('out', { recursive: true })
 
-const r = [1000, 5000, 9000, 13000, 17000]
+const r = [1000, 9000, 17000]
 for (const i of r) {
   for (const j of r) {
     const str = fs.createWriteStream(`out/${i}_${j}.fa`)

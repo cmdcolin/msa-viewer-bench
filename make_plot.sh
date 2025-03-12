@@ -1,3 +1,3 @@
 #!/bin/bash
-node gather.js > out.tsv
+node gather.ts >out.tsv
 Rscript plot.R
