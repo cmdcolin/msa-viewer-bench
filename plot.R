@@ -1,10 +1,12 @@
 library(ggplot2)
+library(gridExtra)
 library(scales)
 
 
-df <- read.table("out.tsv", header = TRUE)
+df <- read.table("varyXY.tsv", header = TRUE)
 df$size <- df$size * df$size
-x <- ggplot(df, aes(x = size, y = time, color = program)) +
+p1 <- ggplot(df, aes(x = size, y = time, color = program)) +
+  labs(tag = "A") +
   geom_line(stat = "summary") +
   geom_errorbar(width = 0.2, stat = "summary") +
   geom_jitter(size = 0.5, position = position_jitter(width = 0.1, seed = 42)) +
@@ -13,4 +15,31 @@ x <- ggplot(df, aes(x = size, y = time, color = program)) +
   xlab("MSA size (total number of characters, C)")
 
 
-ggsave("img/1.png", x, width = 7, height = 4)
+df <- read.table("varyX.tsv", header = TRUE)
+p2 <- ggplot(df, aes(x = x_size, y = time, color = program)) +
+  labs(tag = "B") +
+  geom_line(stat = "summary") +
+  geom_errorbar(stat = "summary", aes(width = 20000)) +
+  geom_jitter(size = 0.5, position = position_jitter(width = 0.1, seed = 42)) +
+  scale_x_continuous(
+    labels = function(x) paste0("N=", x)
+  ) +
+  ylab("Time to render MSA / seconds") +
+  xlab("MSA size with 100 columns, N rows")
+
+
+
+df <- read.table("varyY.tsv", header = TRUE)
+p3 <- ggplot(df, aes(x = y_size, y = time, color = program)) +
+  labs(tag = "C") +
+  geom_line(stat = "summary") +
+  geom_errorbar(width = 0.2, stat = "summary") +
+  geom_jitter(size = 0.5, position = position_jitter(width = 0.1, seed = 42)) +
+  scale_x_continuous(
+    labels = function(x) paste0("N=", x)
+  ) +
+  ylab("Time to render MSA / seconds") +
+  xlab("MSA size with 100 rows, N columns")
+
+res <- grid.arrange(p1, p2, p3, nrow = 2)
+ggsave("img/all.png", res, width = 14, height = 9)

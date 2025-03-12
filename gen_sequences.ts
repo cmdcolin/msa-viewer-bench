@@ -21,7 +21,7 @@ const letters = [
   'W',
   'Y',
 ]
-function gen(M, N, str) {
+function gen(M: number, N: number, str: fs.WriteStream) {
   for (let i = 0; i < M; i++) {
     const id = `>seq${i}`
     let seq = ''
@@ -34,11 +34,25 @@ function gen(M, N, str) {
 
 fs.mkdirSync('out', { recursive: true })
 
-const r = [1000, 9000, 17000]
-for (const i of r) {
-  for (const j of r) {
-    const str = fs.createWriteStream(`out/${i}_${j}.fa`)
-    gen(i, j, str)
-    str.end()
-  }
+// const i = 100
+// for (let j = 128; j < 1_700_000; j *= 2) {
+//   console.log({ i, j })
+//   const str = fs.createWriteStream(`out/${i}_${j}.fa`)
+//   gen(i, j, str)
+//   str.end()
+// }
+//
+// const j = 100
+// for (let i = 128; i < 1_700_000; i *= 2) {
+//   console.log({ i, j })
+//   const str = fs.createWriteStream(`out/${i}_${j}.fa`)
+//   gen(i, j, str)
+//   str.end()
+// }
+
+for (let i = 128; i < 20_000; i *= 2) {
+  console.log({ i })
+  const str = fs.createWriteStream(`out/${i}_${i}.fa`)
+  gen(i, i, str)
+  str.end()
 }

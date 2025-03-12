@@ -1,23 +1,30 @@
 import fs from 'fs'
+
+const base = process.argv[2]
 console.log(
   [
-    ['program', 'size', 'time', 'mean', 'sd'].join('\t'),
+    ['program', 'x_size', 'y_size', 'time', 'mean', 'sd'].join('\t'),
     ...fs
-      .readdirSync('json')
+      .readdirSync(base)
       .filter(f => f !== 'README.md')
       .flatMap(file => {
-        const text = fs.readFileSync(`json/${file}`, 'utf8')
+        const text = fs.readFileSync(`${base}/${file}`, 'utf8')
         const res = JSON.parse(text)
-        const e = res.results[0]
-        return e.times.map((time: string) =>
-          [
-            file.split('-')[0],
-            file.split('-')[1].split('_')[0],
-            time,
-            e.mean,
-            e.stddev,
-          ].join('\t'),
-        )
+        const e = res.results[0] as {
+          times: number[]
+          mean: number
+          stddev: number
+        }
+        const r = file.replace('.fa.json', '')
+        const [program, sample] = r.split('-')
+        const [x, y] = sample.split('_')
+        return e.times
+          .map(time =>
+            time < 120
+              ? [program, x, y, time, e.mean, e.stddev].join('\t')
+              : undefined,
+          )
+          .filter(f => !!f)
       }),
   ].join('\n'),
 )

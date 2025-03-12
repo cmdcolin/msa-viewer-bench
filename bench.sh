@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ITERS=5
+ITERS=10
 WARMUP=1
 
 function bench() {

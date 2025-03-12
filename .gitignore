@@ -2,6 +2,7 @@ screenshots
 node_modules
 json
 out
+out_multi
 *.pdf
 a.out
 alitreeviz
