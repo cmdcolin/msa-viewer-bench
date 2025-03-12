@@ -10,7 +10,10 @@ const url = process.argv[2]
 await page.goto(url)
 
 // Set screen size
-await page.setViewport({ width: 1080, height: 1024 })
+await page.setViewport({
+  width: 1080,
+  height: 1024,
+})
 
 await page.waitForSelector('canvas', { timeout: 120000 })
 const ret = await page.$eval('canvas', (val: HTMLCanvasElement) =>
