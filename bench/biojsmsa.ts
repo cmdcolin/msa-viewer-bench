@@ -12,7 +12,9 @@ await page.goto(url)
 // Set screen size
 await page.setViewport({ width: 1080, height: 1024 })
 
-await page.waitForSelector('.biojs_msa_seqblock', { timeout: 120000 })
+await page.waitForSelector('.biojs_msa_seqblock', {
+  timeout: 120000,
+})
 const ret = await page.$eval('canvas', (val: HTMLCanvasElement) =>
   val.toDataURL().replace(/^data:image\/\w+;base64,/, ''),
 )
