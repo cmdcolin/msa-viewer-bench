@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import 'msa/css/msa.css'
 
 const params = new URLSearchParams(window.location.search)
-const size = +(params.get('size') || '128')
+const file =
+  params.get('file') || 'https://jbrowse.org/demos/msabench/128_128.fa'
 
 function parseSmallFasta(text: string) {
   return text
@@ -31,12 +32,10 @@ export default function MSA() {
       try {
         if (!renderRef.current) {
           renderRef.current = true
-          const res = await fetch(
-            `https://jbrowse.org/demos/msabench/${size}_${size}.fa`,
-          )
+          const res = await fetch(file)
 
           if (!res.ok) {
-            throw new Error('failed to fetch')
+            throw new Error(`HTTP ${res.status} fetching ${file}`)
           }
           const seqs = parseSmallFasta(await res.text())
           var m = new msa({
