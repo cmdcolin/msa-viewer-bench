@@ -12,8 +12,7 @@ p1 <- ggplot(df, aes(x = size, y = time, color = program)) +
   geom_jitter(size = 0.5, position = position_jitter(width = 0.1, seed = 42)) +
   scale_x_continuous(breaks = scales::pretty_breaks(n = 10)) +
   ylab("Time to render MSA / seconds") +
-  xlab("MSA size (total number of characters, C)") +
-  ggtitle("MSA with equal rows and columns")
+  xlab("MSA size (total number of characters, C)")
 
 
 df <- read.table("varyX.tsv", header = TRUE)
@@ -27,8 +26,8 @@ p2 <- ggplot(df, aes(x = size, y = time, color = program)) +
     labels = function(x) paste0("N=", x)
   ) +
   ylab("Time to render MSA / seconds") +
-  xlab("MSA size (total number of characters, C)") +
-  ggtitle("MSA with 100 rows, varying number of columns")
+  xlab("MSA size (total number of characters, C)")
+
 
 
 
@@ -43,8 +42,8 @@ p3 <- ggplot(df, aes(x = size, y = time, color = program)) +
     labels = function(x) paste0("N=", x)
   ) +
   ylab("Time to render MSA / seconds") +
-  xlab("MSA size with 100 rows, N columns") +
-  ggtitle("MSA with 100 columns, varying number of rows")
+  xlab("MSA size (total number of characters, C)")
+
 
 res <- grid.arrange(p1, p2, p3, nrow = 2)
 ggsave("img/all.png", res, width = 14, height = 9)
